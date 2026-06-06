@@ -3,19 +3,19 @@ import pandas as pd
 import pickle
 
 # Fetch poster from TMDB API
-#def fetch_poster(movie_id):
-    #url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=YOUR_API_KEY&language=en-US"
+def fetch_poster(movie_id):
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=YOUR_API_KEY&language=en-US"
 
-    #response = requests.get(url)
-    #data = response.json()
+    response = requests.get(url)
+    data = response.json()
 
-    #poster_path = data.get('poster_path')
+    poster_path = data.get('poster_path')
 
-    #if poster_path:
-     #   full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-     #   return full_path
-    #else:
-     #   return "https://via.placeholder.com/500x750?text=No+Image"
+    if poster_path:
+        full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
+        return full_path
+    else:
+        return "https://via.placeholder.com/500x750?text=No+Image"
 
 
 # Recommendation function
@@ -35,7 +35,7 @@ def recommend(selected_movie):
     )[1:6]
 
     recommended_movies = []
-    #recommended_movies_posters = []
+    recommended_movies_posters = []
 
     for i in movies_list:
 
@@ -45,7 +45,7 @@ def recommend(selected_movie):
         recommended_movies.append(movies.iloc[i[0]].title)
 
         # Poster
-       # recommended_movies_posters.append(fetch_poster(movie_id))
+        recommended_movies_posters.append(fetch_poster(movie_id))
 
     return recommended_movies #recommended_movies_posters
 
@@ -78,22 +78,22 @@ if st.button('Recommend'):
 
     with col1:
         st.text(recommended_movies[0])
-        #st.image(recommended_movies_posters[0])
+        st.image(recommended_movies_posters[0])
 
     with col2:
         st.text(recommended_movies[1])
-        #st.image(recommended_movies_posters[1])
+        st.image(recommended_movies_posters[1])
 
     with col3:
         st.text(recommended_movies[2])
-        #st.image(recommended_movies_posters[2])
+        st.image(recommended_movies_posters[2])
 
     with col4:
         st.text(recommended_movies[3])
-        #st.image(recommended_movies_posters[3])
+        st.image(recommended_movies_posters[3])
 
     with col5:
         st.text(recommended_movies[4])
-        #st.image(recommended_movies_posters[4])
+        st.image(recommended_movies_posters[4])
 
 
